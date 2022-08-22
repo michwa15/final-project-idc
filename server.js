@@ -1,10 +1,13 @@
 const express = require("express");
+const app = express();
+const connectDB = require('./database/db');
+const authRoutes = require('./routes/auth');
+
+app.use(express.json());
+app.use('/api/auth', authRoutes);
+
+connectDB();
 
 const PORT = process.env.PORT || 3001;
-const app = express();
-
-app.get("/api", (req, res) => {
-    res.json({ message: "Hello from server!" });
-});
 
 app.listen(PORT, console.log(`Server listening on ${PORT}`));
