@@ -1,4 +1,4 @@
 module.exports = {
     jwtSecret: 'dscervetverbgtrbvdfgrbrgbvfdrbgt',
-    jwtExpire: 1/144
-}
+    jwtExpire: '0.2h'
+};

@@ -1,4 +1,4 @@
-export const shoesItems = [
+exports.shoesItems = [
     {
         "id": "337cd868-e378-4575-8733-368a57519981",
         "brand": "Nike",

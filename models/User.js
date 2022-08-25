@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { Shoe } = require('./persist');
 
 const userData = new mongoose.Schema(
     {
@@ -15,6 +16,10 @@ const userData = new mongoose.Schema(
             type: String,
             default: "user",
         },
+        cart: {
+            type: [Shoe],
+            default: []
+        }
     },
     { timestamps: true }
 );
