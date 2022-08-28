@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const {jwtSecret, jwtExpire} = require('../config/keys');
 
 exports.signUpController = async (req, res) => {
-    const { username, password } = req.body;
+    const { fullname, username, password } = req.body;
 
     try {
         const user = await User.findOne({ email: username });
@@ -18,6 +18,7 @@ exports.signUpController = async (req, res) => {
         const hashPassword = await bcrypt.hash(password, salt);
 
         const newUser = new User({
+            fullname,
             email: username,
             password: hashPassword
         })
@@ -38,7 +39,6 @@ exports.signUpController = async (req, res) => {
 
 exports.signInController = async (req, res) => {
     const { email, password, isRemembered } = req.body;
-    
     try {
         const user = await User.findOne({ email });
         if(!user) {
@@ -60,11 +60,13 @@ exports.signInController = async (req, res) => {
         }
         const expiresIn = isRemembered ? '10d' : jwtExpire;
         
-        jwt.sign(payload, jwtSecret, { expiresIn }, (err, token) => {
+        jwt.sign(payload, jwtSecret, { expiresIn }, async (err, token) => {
             if(err) {
                 console.log('Token arror', err);
             }    
             const {_id, email, password, role} = user;
+            const date = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jerusalem' });
+            await User.findOneAndUpdate({email: user.email}, {$push: {logInHistory: date}});
             res.json({
                 token,
                 user: { _id, email, password, role }
@@ -72,6 +74,22 @@ exports.signInController = async (req, res) => {
         })
     } catch (err) {
         console.log("Signin Controller error");
+        res.status(500).json({
+            errorMessage: 'Server error'
+        })
+    }
+}
+
+exports.logoutController = async (req, res) => {
+    const { email } = req.body;
+    try {
+        const date = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jerusalem' });
+        await User.findOneAndUpdate({email}, {$push: {logOutHistory: date}});
+        res.json({
+            successMessage: 'Logout success.'
+       })
+    } catch (err) {
+        console.log("Signout Controller error");
         res.status(500).json({
             errorMessage: 'Server error'
         })

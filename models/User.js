@@ -1,8 +1,12 @@
 const mongoose = require("mongoose");
-const { Shoe } = require('./persist');
+const { Shoe, Purchase } = require('./persist');
 
 const userData = new mongoose.Schema(
     {
+        fullname: {
+            type: String,
+            default: ''
+        },
         email: {
             type: String,
             required: true,
@@ -18,6 +22,24 @@ const userData = new mongoose.Schema(
         },
         cart: {
             type: [Shoe],
+            default: []
+        },
+        purchases: {
+            type: [Purchase],
+            default: []
+        },
+        logInHistory: {
+            type: Array,
+            items: {
+                type: String
+            },
+            default: []
+        },
+        logOutHistory: {
+            type: Array,
+            items: {
+                type: String
+            },
             default: []
         }
     },

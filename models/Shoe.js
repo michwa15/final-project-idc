@@ -3,7 +3,7 @@ const mongoose = require ('mongoose');
 const shoeData = new mongoose.Schema ({
     id: {
         type: String,
-        required: true
+        default: "random-string"
     },
     brand: {
         type: String,

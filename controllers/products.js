@@ -1,5 +1,4 @@
 const { User, Shoe } = require('../models/persist');
-const {shoesItems} = require('../database/shoes-items');
 
 exports.getProductsController = async (req, res) => {
     try {
@@ -73,6 +72,6 @@ exports.removeCartItemController = async (req, res) => {
 
 exports.getProductsByNameController = async (req, res) => {
     const { value } = req.query;
-    const shoesBySearch = shoesItems.filter(shoe => shoe.shoe.toLowerCase().includes(value));
+    const shoesBySearch = (await Shoe.find({})).filter(shoe => shoe.shoe.toLowerCase().includes(value));
     res.json({shoesBySearch})
 }
