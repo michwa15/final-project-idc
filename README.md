@@ -34,3 +34,10 @@ You should run this command only once before running the app.
 Runs both server and client side concurrently.\
 This is the command to start our whole app.
 
+## How to Run Our App
+
+**1.** In the root folder (**final-project**) run the command: `npm install`.\
+**2.** In the root folder (**final-project**) run the command: `npm run initial-data`.\
+**3.** Go to **client-final-project** (from the root run: `cd client-final-project`) and then run the command: `npm install`.\
+**4.** Go back to root folder (**final-project**) and start the app by running the command: `npm run dev`.\
+
