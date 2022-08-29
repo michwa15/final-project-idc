@@ -45,8 +45,8 @@ This is the command to start our whole app.
 ## Learn More 
 
 By default, every new user that registered to our store, gets an inititative value of `role: user`.\
-Users can be either with `role: user` or with `role: admin`. It's important to know that when user is trying to click on the button\
-`**My Store**` that appears as one of the options in our navbar he can be redirected to 2 different pages:\
+Users can be either with `role: user` or with `role: admin`. It's important to know that when user is trying to click on the button 
+**My Store** that appears as one of the options in our navbar he can be redirected to 2 different pages:
 1. If you have `role: user` you will be directed to a page where you won't see anything except for the message "you're not the admin and therefor can't see this page". 
 2. If you have `role: admin`, the admin-setting page will be shown and there you'll be able to edit your store as you want. 
 
